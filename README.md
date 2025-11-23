@@ -1,73 +1,172 @@
-# Welcome to your Lovable project
+# RockPaperFHE - Encrypted Rock Paper Scissors Arena
 
-## Project info
+A provably fair Rock Paper Scissors game built with Fully Homomorphic Encryption (FHE) technology, ensuring complete move privacy until reveal.
 
-**URL**: https://lovable.dev/projects/6715185f-a41c-4124-8ecd-f83b3219420e
+## 🎯 Overview
 
-## How can I edit this code?
+RockPaperFHE brings the classic game on-chain with instant matches and encrypted move commitments. Players submit encrypted moves, and reveals occur only after both sides commit, preventing front-running and preserving suspense.
 
-There are several ways of editing your application.
+## ✨ Key Features
 
-**Use Lovable**
+- **🔒 FHE Encryption**: All moves are encrypted using Fully Homomorphic Encryption before submission
+- **⚡ Instant Matching**: Real-time opponent pairing system
+- **🛡️ Zero Knowledge**: Provably fair outcomes with no information leakage
+- **🎮 Arcade Theme**: Retro neon aesthetic with pixel-perfect UI
+- **📊 Leaderboard**: Track wins, losses, and streaks
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/6715185f-a41c-4124-8ecd-f83b3219420e) and start prompting.
+## 🚀 Quick Start
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js >= 20.11.1
+- npm or bun
+- MetaMask or compatible Web3 wallet
+- Sepolia testnet ETH
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Install frontend dependencies
+npm install
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Install contract dependencies
+cd contracts
+npm install
+cd ..
 ```
 
-**Edit a file directly in GitHub**
+### Environment Setup
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Create a `.env` file:
 
-**Use GitHub Codespaces**
+```env
+VITE_SEPOLIA_RPC_URL=https://ethereum-sepolia-rpc.publicnode.com
+VITE_CONTRACT_ADDRESS=
+VITE_WALLETCONNECT_PROJECT_ID=
+PRIVATE_KEY=your_private_key_here
+ETHERSCAN_API_KEY=your_etherscan_api_key
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Development
 
-## What technologies are used for this project?
+```bash
+# Start frontend
+npm run dev
 
-This project is built with:
+# Compile contracts
+cd contracts && npm run compile
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+# Run tests
+npm test
 
-## How can I deploy this project?
+# Deploy to Sepolia
+npm run deploy:sepolia
+```
 
-Simply open [Lovable](https://lovable.dev/projects/6715185f-a41c-4124-8ecd-f83b3219420e) and click on Share -> Publish.
+## 📦 Technology Stack
 
-## Can I connect a custom domain to my Lovable project?
+- **Frontend**: React 18 + Vite + TypeScript
+- **Web3**: Wagmi + RainbowKit
+- **FHE**: @zama-fhe/relayer-sdk@0.2.0
+- **Contracts**: Solidity 0.8.24 + @fhevm/solidity@^0.8.0
+- **UI**: ShadcnUI + Tailwind CSS
 
-Yes, you can!
+## 🎮 How to Play
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. Connect your Web3 wallet
+2. Create or join a match
+3. Select your gesture (Rock/Paper/Scissors)
+4. Submit encrypted move
+5. Wait for opponent
+6. Reveal results
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 🔐 FHE Implementation
+
+All player moves are encrypted client-side before submission:
+
+```typescript
+// Encrypt gesture (0=Rock, 1=Paper, 2=Scissors)
+const { handle, inputProof } = await encryptUint8(
+  gesture,
+  contractAddress,
+  userAddress
+);
+
+// Submit to contract
+await contract.submitMove(matchId, handle, inputProof);
+```
+
+## 📁 Project Structure
+
+```
+13_RockPaperFHE/
+├── contracts/              # Smart contracts
+│   ├── contracts/RockPaperArena.sol
+│   ├── scripts/           # Deploy & verify scripts
+│   └── test/              # Contract tests
+├── src/                    # Frontend source
+│   ├── components/        # React components
+│   ├── contracts/         # Generated ABIs
+│   ├── hooks/             # Custom hooks
+│   ├── pages/             # Route pages
+│   └── utils/             # FHE utilities
+└── docs/                  # Documentation
+```
+
+## 🧪 Testing
+
+```bash
+# Contract tests
+cd contracts && npm test
+
+# 19 passing tests covering:
+# - Match creation and joining
+# - Move submission
+# - Winner determination
+# - Gas optimization
+```
+
+## 🐛 Troubleshooting
+
+### FHE Initialization
+- Check COOP/COEP headers in vite.config.ts
+- Use CDN dynamic import method
+- Clear browser cache
+
+### Contract Deployment
+- Ensure Sepolia ETH balance
+- Verify RPC URL connectivity
+- Check private key format
+
+## 📚 Documentation
+
+- [Frontend Development Guide](./docs/FRONTEND_DEV.md)
+- [Backend Development Guide](./docs/BACKEND_DEV.md)
+- [Complete FHE Guide](../../docs/FHE_COMPLETE_GUIDE_FULL_CN.md)
+
+## 🎯 Roadmap
+
+- [x] Basic match creation and joining
+- [x] FHE encrypted move submission
+- [x] Winner determination with homomorphic operations
+- [ ] Gateway integration for result decryption
+- [ ] Token rewards and staking
+- [ ] Tournament system
+- [ ] NFT achievements
+- [ ] Mobile PWA version
+
+## 📄 License
+
+MIT License
+
+## 🙏 Acknowledgments
+
+- **Zama** - FHE technology and fhEVM
+- **RainbowKit** - Wallet connection UI
+- **ShadcnUI** - UI components
+
+---
+
+**Built with ❤️ using Fully Homomorphic Encryption**
+
+*Play with confidence. Your moves remain private.*

@@ -8,11 +8,20 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    // Enable COOP/COEP headers for FHE WASM support
+    headers: {
+      "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Embedder-Policy": "require-corp",
+    },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+  },
+  // Optimize dependencies for FHE SDK
+  optimizeDeps: {
+    exclude: ["@zama-fhe/relayer-sdk"],
   },
 }));

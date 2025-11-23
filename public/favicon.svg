@@ -1,0 +1,31 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="#020617"/>
+
+  <!-- Neon Glow Effect -->
+  <rect x="4" y="4" width="56" height="56" rx="8" fill="url(#gradient)" opacity="0.3"/>
+
+  <!-- Rock Paper Scissors Icons -->
+  <g transform="translate(32, 32)">
+    <!-- Rock (Fist) -->
+    <circle cx="-12" cy="-8" r="5" fill="#F97316" opacity="0.9"/>
+    <circle cx="-12" cy="-2" r="5" fill="#F97316"/>
+
+    <!-- Paper (Hand) -->
+    <rect x="2" y="-12" width="3" height="10" rx="1.5" fill="#10B981" opacity="0.9"/>
+    <rect x="6" y="-12" width="3" height="10" rx="1.5" fill="#10B981"/>
+    <rect x="10" y="-12" width="3" height="10" rx="1.5" fill="#10B981" opacity="0.9"/>
+
+    <!-- Scissors (V shape) -->
+    <line x1="-8" y1="8" x2="-2" y2="14" stroke="#6366F1" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-8" y1="14" x2="-2" y2="8" stroke="#6366F1" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Gradient Definition -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F97316;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366F1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
