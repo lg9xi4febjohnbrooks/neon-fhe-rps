@@ -38,3 +38,4 @@ contracts/typechain-types
 # Build files
 build/
 *.tsbuildinfo
+.vercel

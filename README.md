@@ -2,6 +2,12 @@
 
 A provably fair Rock Paper Scissors game built with Fully Homomorphic Encryption (FHE) technology, ensuring complete move privacy until reveal.
 
+## 🌐 Live Demo
+
+**Play Now**: [https://rockpaperfhe.vercel.app](https://rockpaperfhe.vercel.app)
+
+**Contract**: `0x6F0ded5A8a3507F2A21D02AC0cf84228d91Ed73e` ([View on Etherscan](https://sepolia.etherscan.io/address/0x6F0ded5A8a3507F2A21D02AC0cf84228d91Ed73e))
+
 ## 🎯 Overview
 
 RockPaperFHE brings the classic game on-chain with instant matches and encrypted move commitments. Players submit encrypted moves, and reveals occur only after both sides commit, preventing front-running and preserving suspense.
@@ -41,8 +47,8 @@ Create a `.env` file:
 
 ```env
 VITE_SEPOLIA_RPC_URL=https://ethereum-sepolia-rpc.publicnode.com
-VITE_CONTRACT_ADDRESS=
-VITE_WALLETCONNECT_PROJECT_ID=
+VITE_CONTRACT_ADDRESS=0x6F0ded5A8a3507F2A21D02AC0cf84228d91Ed73e
+VITE_WALLETCONNECT_PROJECT_ID=your_walletconnect_project_id
 PRIVATE_KEY=your_private_key_here
 ETHERSCAN_API_KEY=your_etherscan_api_key
 ```
